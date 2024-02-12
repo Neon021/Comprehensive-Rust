@@ -1,27 +1,18 @@
-fn factorial(n: u32) -> u32 {
-    let mut product = 1;
-    for i in 1..=n {
-        product *= dbg!(i);
-    }
-    product
-}
-
-fn fizzbuzz(n: u32) {
-    for i in 0..=n {
-        if i % 3 == 0 {
-            println!("{i} is divisible by 3");
-        } else if i % 5 == 0 {
-            println!("{i} is divisible by 5");
-        } else if i % 3 == 0 && i % 5 == 0 {
-            println!("{i} is divisible by both 3 and 5");
+/// Determine the length of the collatz sequence beginning at `n`.
+fn collatz_length(n: i32) -> u32 {
+    if n > 1 {
+        if n % 2 == 0 {
+            println!("{n} is even");
+            collatz_length(n / 2)
         } else {
-            println!("{i} is neither divisible by 3 or 5");
+            println!("{n} is odd");
+            collatz_length(n * 3 + 1)
         }
+    } else {
+        1
     }
 }
 
 fn main() {
-    fizzbuzz(44);
-    let n = 4;
-    println!("{n}! = {}", factorial(n));
+    println!("{}", collatz_length(56));
 }
