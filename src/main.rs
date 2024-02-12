@@ -1,13 +1,11 @@
-fn main() {
-    let a = 10;
-    println!("before: {a}");
-    {
-        let a = "hello";
-        println!("inner scope: {a}");
-
-        let a = true;
-        println!("shadowed in inner scope: {a}");
+fn gcd(a: u32, b: u32) -> u32 {
+    if b > 0 {
+        gcd(b, a % b)
+    } else {
+        a
     }
+}
 
-    println!("after: {a}");
+fn main() {
+    println!("gcd: {}", gcd(143, 52));
 }
