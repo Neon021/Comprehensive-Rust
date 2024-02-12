@@ -1,14 +1,18 @@
-fn fib(n: u32) -> u32 {
-    if n <= 2 {
-        // The base case.
-        1
+/// Determine the length of the collatz sequence beginning at `n`.
+fn collatz_length(n: i32) -> u32 {
+    if n > 1 {
+        if n % 2 == 0 {
+            println!("{n} is even");
+            collatz_length(n / 2)
+        } else {
+            println!("{n} is odd");
+            collatz_length(n * 3 + 1)
+        }
     } else {
-        // the recursive case.
-        fib(n - 1) + fib(n - 2)
+        1
     }
 }
 
 fn main() {
-    let n = 20;
-    println!("fib(n) = {}", fib(n));
+    println!("{}", collatz_length(56));
 }
