@@ -1,14 +1,13 @@
-fn fib(n: u32) -> u32 {
-    if n <= 2 {
-        // The base case.
-        1
-    } else {
-        // the recursive case.
-        fib(n - 1) + fib(n - 2)
-    }
-}
-
 fn main() {
-    let n = 20;
-    println!("fib(n) = {}", fib(n));
+    let a = 10;
+    println!("before: {a}");
+    {
+        let a = "hello";
+        println!("inner scope: {a}");
+
+        let a = true;
+        println!("shadowed in inner scope: {a}");
+    }
+
+    println!("after: {a}");
 }
