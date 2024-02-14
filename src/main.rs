@@ -1,39 +1,37 @@
-fn transpose(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
-    let mut result = [[0; 3]; 3];
-    for i in 0..3 {
-        for j in 0..3 {
-            result[j][i] = matrix[i][j];
-        }
+// Calculate the magnitude of a vector by summing the squares of its coordinates
+// and taking the square root. Use the `sqrt()` method to calculate the square
+// root, like `v.sqrt()`.
+
+use core::f64;
+
+fn magnitude(vector: &[f64; 3]) -> f64 {
+    let mut mag_squared = 0.0;
+    for coord in vector {
+        mag_squared += coord * coord;
     }
-    result
+    mag_squared.sqrt()
 }
 
-#[test]
-fn test_transpose() {
-    let matrix = [
-        [101, 102, 103], //
-        [201, 202, 203],
-        [301, 302, 303],
-    ];
-    let transposed = transpose(matrix);
-    assert_eq!(
-        transposed,
-        [
-            [101, 201, 301], //
-            [102, 202, 302],
-            [103, 203, 303],
-        ]
-    );
+// Normalize a vector by calculating its magnitude and dividing all of its
+// coordinates by that magnitude.
+
+fn normalize(vector: &mut [f64; 3]) {
+    let mag = magnitude(vector);
+    vector[0] /= mag;
+    vector[1] /= mag;
+    vector[2] /= mag;
 }
+
+// Use the following `main` to test your work.
 
 fn main() {
-    let matrix = [
-        [101, 102, 103], // <-- the comment makes rustfmt add a newline
-        [201, 202, 203],
-        [301, 302, 303],
-    ];
+    println!(
+        "Magnitude of a unit vector: {}",
+        magnitude(&[0.0, 1.0, 0.0])
+    );
 
-    println!("matrix: {:#?}", matrix);
-    let transposed = transpose(matrix);
-    println!("transposed: {:#?}", transposed);
+    let mut v = [1.0, 2.0, 9.0];
+    println!("Magnitude of {v:?}: {}", magnitude(&v));
+    normalize(&mut v);
+    println!("Magnitude of {v:?} after normalization: {}", magnitude(&v));
 }
